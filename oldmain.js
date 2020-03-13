@@ -37,9 +37,6 @@ class View {
         container1.bodyAdd(container1)
     }
 
-    update() {
-        display.innerHTML
-    }
 }
 
 
@@ -109,9 +106,10 @@ buttons = [
     ["0", ".", "=", "+"]
 ];
 
-input = [];
-formula = [];
-
+// input = [];
+// formula = [];
+input = "";
+formula = "";
 
 // When any button is clicked
 // get "says"
@@ -126,59 +124,32 @@ formula = [];
 // }else {numbers();}
 
 
+// needs to iterate across formula
+// for (i=0, i<formula.length, i++)
+// if formula[i] == nan then chari=formulai
+// else chari= parsefloat(formula[i])
+// When operator button is clicked
 function operator(character) {
-
-    formula.push(input.join(""));
+    formula = formula + parseInt(input) + character;
     console.log(formula, "operator ran");
-    if (formula.length==3){
-        calculate(character);
-        formula.push(character);
-        console.log("new formula:",formula)
-        input = [];
-    }else{
-    formula.push(character);
-    console.log(formula, "second part of operator");
-    input = [];
-}
+    input = "";
 }
 // When number or decimal is clicked
 function numbers(character) {
     // input.push(character)
-    input.push(character);
+    input = input + character;
     console.log(input, "character ran")
 }
 
 // When equals is clicked 
-function calculate() {
-    formula.push(input.join(""));
-    console.log(formula, "calc operator ran");
-    var x = formula[0];
-    var y = formula[2];
-    var op = formula[1]
-    switch (op){
-        case "+":
-            var calc = parseInt(x)+parseInt(y);
-            break;
-        case "-":
-            var calc = parseInt(x)-parseInt(y);
-            break;
-        case "*":
-            var calc = parseInt(x)*parseInt(y);
-            break;
-        case "/":
-            var calc = parseInt(x)/parseInt(y);
-            break;
-    }
-    formula = [];
-    input=[];
-    formula.push(calc);
-    console.log("calc equals:", calc);
-    console.log("new formula:",formula)
+function calculate(character) {
     // answer = string(formula)
     // formula.push(input.join(""));
-    // console.log(formula, "operator ran");
-    // var form = formula.join(" ");
-    // console.log(form);
+    numbers(character);
+    var final = formula + parseInt(input) 
+    console.log(formula, "operator ran");
+    var answer = final;
+    console.log(answer);
     // var bt = form.toString();
     // console.log(bt);
     // var answer = form.toString();
@@ -197,36 +168,32 @@ function calculate() {
     function takeNumber(e) {
         // 
         var character = e.target.says
-        // console.log(character);
-        // var pos = e.target.id;
-        // // get row coordinates
-        // var charIndex1 = 8;
-        // // console.log(pos.charAt(charIndex1));
-        // var rowIndex = pos.charAt(charIndex1);
-        // // get column coordinates
-        // var charIndex2 = 10;
-        // // console.log(pos.charAt(charIndex2));
-        // var colIndex = pos.charAt(charIndex2);
-        // // console.log(pos);
-        // // calculate index
-        // var operators = ["/","+","-","*"];
-        // var buttonIndex = (4 * parseInt(rowIndex) + parseInt(colIndex));
-        if (character == buttons[0][3] || character == buttons[1][3] || character == buttons[2][3] || character == buttons[3][3]) {
+        console.log(character);
+        var pos = e.target.id;
+        // get row coordinates
+        var charIndex1 = 8;
+        console.log(pos.charAt(charIndex1));
+        var rowIndex = pos.charAt(charIndex1);
+        // get column coordinates
+        var charIndex2 = 10;
+        console.log(pos.charAt(charIndex2));
+        var colIndex = pos.charAt(charIndex2);
+        console.log(pos);
+        // calculate index
+        var buttonIndex = (4 * parseInt(rowIndex) + parseInt(colIndex));
+        if (buttonIndex === (3 || 7 || 11 || 15)) {
             operator(character);
-            console.log("firing operator")
             // convert to switch case? if says = etc. then 
-        } else if (character === buttons[3][2]) {
-            calculate();
-            console.log("calculate fired")
-        } else { numbers(character); 
-        console.log("numbers fired")}
+        } else if (buttonIndex == 14) {
+            calculate(character);
+        } else { numbers(character); }
         // // if button index is 3, 7, 11, 15 then do join array 1 function
         // // if (buttonIndex == )
         // // if button index is 14 then perform calculation function
         // // else push item at button index to array 1
 
         // buttons[buttonIndex] ;
-        console.log(character, "click worked");
+        console.log("click worked");
     }
 // }
 
