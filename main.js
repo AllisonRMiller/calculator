@@ -131,7 +131,7 @@ class Model {
         } else if(this.formula.length==1){
             this.formula=[];
             this.input.push(character);
-            console.log(this.input, "character ran and formula cleared",formula)
+            console.log(this.input, "character ran and formula cleared")
         } else{
             this.input.push(character);
             console.log(this.input, "character ran")
