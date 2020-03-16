@@ -11,14 +11,14 @@ class View {
 
     build() {
 
-        var container1 = new Element("div", "container bg-dark", "topLevelContainer");
+        var container1 = new Element("div", "container container-lg bg-dark", "topLevelContainer");
         console.log(container1);
         var displayRow = new Element("div", "row", "displayRow");
         console.log(displayRow);
-        var display = new Column("div", "col bg-light border border-dark p-5 text-right", "display", "hello");
+        var display = new Column("div", "col bg-light border border-dark p-5 text-right text-break font-weight-bold", "display", "hello");
         console.log(display);
         var clearRow = new Element("div", "row", "clearRow")
-        var clearButton = new Column("div", "col-3 p-5 border border-muted text-primary", "clear", "C")
+        var clearButton = new Column("div", "col-3 p-5 border border-rounded border-muted text-danger text-center", "clear", "C")
         clearButton.element.addEventListener("click", this.controller.clear.bind(this.controller));
         console.log(clearButton);
         clearButton.add(clearRow, clearButton);
@@ -31,7 +31,7 @@ class View {
             var gridRow = new Element("div", "row", "gridRow_" + i);
             for (var j = 0; j < 4; j++) {
                 var buttonNum = buttons[i][j];
-                var gridCol = new ButtonColumn("div", "col-3 p-5 border border-muted text-primary", "gridCol_" + i + "_" + j, buttonNum);
+                var gridCol = new Column("div", "col-3 p-5 border border-rounded border-muted text-primary text-center", "gridCol_" + i + "_" + j, buttonNum);
                 gridCol.element.addEventListener("click", this.controller.takeNumber.bind(this.controller));
                 gridCol.add(gridRow, gridCol);
             }
@@ -43,6 +43,7 @@ class View {
         container1.bodyAdd(container1)
 
     }
+    // 
     update(newSays) {
         this.says = newSays;
         display.innerHTML = newSays;
@@ -51,7 +52,7 @@ class View {
     // todo: random welcome symbols
 }
 
-
+// Class to make anything
 class Element extends View {
     constructor(element, classList, id) {
         super();
@@ -81,15 +82,8 @@ class Column extends Element {
 
 }
 
-// todo: remove this and convert to previous column in build
-class ButtonColumn extends Column {
-    constructor(element, classList, id, says) {
-        super(element, classList, id, says);
-    }
-}
 
-
-
+// Map of buttons across calculator
 buttons = [
     ["7", "8", "9", "/"],
     ["4", "5", "6", "*"],
@@ -112,7 +106,7 @@ class Model {
     }
 
 
-
+    // when operator is clicked
     operator(character) {
         if (this.input.length == 0 && this.formula.length == 0) { return };
         if (this.input.length >= 1) {
@@ -132,7 +126,6 @@ class Model {
     }
     // When number or decimal is clicked
     numbers(character) {
-        // input.push(character)
         if (this.input.includes(".") && character == ".") {
 
         } else if(this.formula.length==1){
@@ -176,7 +169,7 @@ class Model {
         this.input = [];
         this.formula.push(calc);
         console.log("calc equals:", calc);
-        console.log("new formula:", this.formula)
+        console.log("new formula:", this.formula);
     }
 }
 
@@ -190,7 +183,7 @@ class Controller {
     setView(v) {
         this.view = v;
     }
-
+    // When anything is clicked
     takeNumber(e) {
         var character = e.target.says
         var displayContent = "";
@@ -202,7 +195,6 @@ class Controller {
                 displayContent = this.model.formula.join("");
             }
             else { displayContent = "0" }
-            // convert to switch case? if says = etc. then 
         } else if (character === "=") {
             this.model.calculate();
             console.log("calculate fired");
@@ -214,7 +206,6 @@ class Controller {
         }
         this.view.update(displayContent);
         console.log(character, "click worked");
-        // if calculate was run show formula else show input
 
     }
 
@@ -233,10 +224,10 @@ class Controller {
 var m = new Model();
 
 var c = new Controller(m);
-let page = new View
+let page = new View;
 
 
 page.build();
 m.setView(page);
 c.setView(page);
-page.setController(c)
+page.setController(c);

@@ -1,0 +1,9 @@
+@font-face {
+    font-family: DS-DIGI;
+    src: url(ds_digital/DS-DIGIB.TTF);
+    font-weight: bold;
+  }
+
+.display{
+    font-family: DS-DIGI;
+}
