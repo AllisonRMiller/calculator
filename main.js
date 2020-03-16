@@ -15,7 +15,7 @@ class View {
         console.log(container1);
         var displayRow = new Element("div", "row", "displayRow");
         console.log(displayRow);
-        var display = new Column("div", "col bg-light border border-dark p-5 text-right text-break font-weight-bold", "display", "hello");
+        var display = new Column("div", "col bg-light border border-muted p-4 text-right text-break font-weight-bold", "display", "hello");
         console.log(display);
         var clearRow = new Element("div", "row", "clearRow")
         var clearButton = new Column("div", "col-3 p-5 border border-rounded border-muted text-danger text-center", "clear", "C")

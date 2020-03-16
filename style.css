@@ -1,9 +1,14 @@
+body{
+  background-color: black;
+}
+
 @font-face {
-    font-family: DS-DIGI;
-    src: url(ds_digital/DS-DIGIB.TTF);
+    font-family: DSDIGI;
+    src: url(./ds_digital/DS-DIGIB.TTF);
     font-weight: bold;
   }
 
-.display{
-    font-family: DS-DIGI;
+#display{
+  font-size: xx-large;
+    font-family: DSDIGI;
 }
